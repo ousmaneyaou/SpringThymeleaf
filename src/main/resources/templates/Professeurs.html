@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="1erTemplate">    <!--la liaison avec la page creer-->
+<head>
+    <meta charset="UTF-8">
+    <title>Profs</title>
+    <!--<link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">-->
+</head>
+<body>
+<div layout:fragment="content1">   <!--la liaison avec la page creer-->
+<div class="container mt-2">
+  <div class="card">
+      <h2 class="card-header"> Liste Des Professeurs</h2><br>
+      <div class="body">
+          <form method="get" th:action="@{index}">
+              <lab>Recherche</lab>
+              <input type="text" name="keyword" placeholder="Enter le nom à chercher" th:value="${keyword}">
+              <button type="submit" class="btn btn-primary">chercher</button>
+          </form>
+          <br>
+          <table class="table table-striped table-bordered">
+              <thead class="table-dark">
+              <tr>
+                  <th>ID</th><th>Nom</th><th>Prenom</th><th>Email</th><th>Date</th><th>Etats</th><th sec:authorize="hasRole('ADMIN')">Actions</th>
+                  <th sec:authorize="hasRole('ADMIN')">Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="p:${listeProfesseur}">
+                  <td th:text="${p.id}"></td>
+                  <td th:text="${p.nom}"></td>
+                  <td th:text="${p.prenom}"></td>
+                  <td th:text="${p.email}"></td>
+                  <td th:text="${p.dateNaissance}"></td>
+                  <td th:text="${p.etat}"></td>
+                 <!-- <td sec:authorize="hasRole('ADMIN')">
+                      <a class="btn btn-primary" th:href="@{formProfesseurs(id=${p.id}, keyword=${keyword},page=${currentPage})}">
+                          Ajouter</a>
+                  </td>-->
+
+                  <td sec:authorize="hasRole('ADMIN')">
+                      <a onclick="return confirm('Etes vous sur?')" class="btn btn-danger" th:href="@{delete(id=${p.id}, keyword=${keyword},page=${currentPage})}">
+                          Supprimer</a>
+                  </td>
+
+                  <td sec:authorize="hasRole('ADMIN')">
+                      <a class="btn btn-success" th:href="@{editProfesseurs(id=${p.id}, keyword=${keyword},page=${currentPage})}">
+                          Modifier</a>
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+          <ul class="nav nav-pills">
+              <li th:each="page, status:${pages}">
+              <a th:class="${status.index==currentPage?'btn btn-primary ms-1':'btn btn-outline-primary ms-1'}"
+                 th:text="${status.index}"
+                 th:href="@{index(page=${status.index},keyword=${keyword})}"
+              ></a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

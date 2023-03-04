@@ -5,40 +5,44 @@
       layout:decorate="1erTemplate">    <!--la liaison avec la page creer-->
 <head>
     <meta charset="UTF-8">
-    <title>Profs</title>
+    <title>Dépots de CV</title>
     <!--<link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">-->
 </head>
 <body>
 <div layout:fragment="content1">   <!--la liaison avec la page creer-->
 <div class="container mt-2">
   <div class="card">
-      <h2 class="card-header"> Liste Des Professeurs</h2><br>
+      <h2 class="card-header"> Liste Des Curiculums Vitaes</h2><br>
       <div class="body">
           <form method="get" th:action="@{index}">
               <lab>Recherche</lab>
-              <input type="text" name="keyword" placeholder="Enter le nom à chercher" th:value="${keyword}">
-              <button type="submit" class="btn btn-primary">chercher</button>
+              <input  type="text" name="keyword" placeholder="Enter le Nom:" th:value="${keyword}">
+              <button  type="submit" class="btn btn-primary" style="margin-right: 140px;">chercher</button>
+
+              <!--<lab >Recherche</lab>
+              <input type="text" name="keyword" placeholder="Enter la Catégorie:" th:value="${keyword}">
+              <button type="submit" class="btn btn-primary">chercher</button>-->
           </form>
           <br>
           <table class="table table-striped table-bordered">
               <thead class="table-dark">
               <tr>
-                  <th>ID</th><th>Nom</th><th>Prenom</th><th>Email</th><th>Date</th><th>Etats</th><th sec:authorize="hasRole('ADMIN')">Actions</th>
+                  <th>ID</th><th>Nom</th><th>Prenom</th><th>Age</th><th>Adresse</th><th>Email</th><th>Telephone</th><th>NiveauEtude</th><th>ExperiencePro</th><th sec:authorize="hasRole('ADMIN')">Actions</th>
                   <th sec:authorize="hasRole('ADMIN')">Actions</th>
               </tr>
               </thead>
               <tbody>
-              <tr th:each="p:${listeProfesseur}">
+              <tr th:each="p:${listeCuriculum}">
                   <td th:text="${p.id}"></td>
                   <td th:text="${p.nom}"></td>
                   <td th:text="${p.prenom}"></td>
+                  <td th:text="${p.age}"></td>
+                  <td th:text="${p.adresse}"></td>
                   <td th:text="${p.email}"></td>
-                  <td th:text="${p.dateNaissance}"></td>
-                  <td th:text="${p.etat}"></td>
-                 <!-- <td sec:authorize="hasRole('ADMIN')">
-                      <a class="btn btn-primary" th:href="@{formProfesseurs(id=${p.id}, keyword=${keyword},page=${currentPage})}">
-                          Ajouter</a>
-                  </td>-->
+                  <td th:text="${p.telephone}"></td>
+                  <td th:text="${p.niveauetude}"></td>
+                  <td th:text="${p.experiencepro}"></td>
+<!--                  <td th:text="${p.category}"></td>-->
 
                   <td sec:authorize="hasRole('ADMIN')">
                       <a onclick="return confirm('Etes vous sur?')" class="btn btn-danger" th:href="@{delete(id=${p.id}, keyword=${keyword},page=${currentPage})}">
@@ -46,7 +50,7 @@
                   </td>
 
                   <td sec:authorize="hasRole('ADMIN')">
-                      <a class="btn btn-success" th:href="@{editProfesseurs(id=${p.id}, keyword=${keyword},page=${currentPage})}">
+                      <a class="btn btn-success" th:href="@{editCuriculums(id=${p.id}, keyword=${keyword},page=${currentPage})}">
                           Modifier</a>
                   </td>
               </tr>

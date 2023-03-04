@@ -17,15 +17,25 @@
       <li class="nav-item">
         <a class="nav-link active" th:href="@{index}">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Emploi Du Temps</a>
-      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link active" th:href="@{Offre}">Offre d'emploi</a>
+      </li>-->
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-          Professeur</a>
+          Offre d'emploi</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" th:href="@{/formProfesseurs}">Nouveau</a></li>
+          <li><a class="dropdown-item" th:href="@{Offre}">Offre disponible</a></li>
+          <li><a class="dropdown-item" th:href="@{/formCuriculums}">Dépots</a></li>
+          <li><a class="dropdown-item" th:href="@{index}">Recherche</a></li>
+
+        </ul>
+      </li>
+      <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+          Curiculum</a>
+        <ul class="dropdown-menu" sec:authorize="hasRole('ADMIN')">
+          <li><a class="dropdown-item" th:href="@{/formCuriculums}" >Nouveau</a></li>
           <li><a class="dropdown-item" th:href="@{index}">Rechercher</a></li>
         </ul>
       </li>

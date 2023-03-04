@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.formLogin();
         http.authorizeRequests().antMatchers("/").permitAll(); /*accés sans authentification*/
-        http.authorizeRequests().antMatchers("/delete/**", "/edit/**", "/save/**", "/formProfesseurs/**").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/delete/**", "/edit/**").hasRole("ADMIN");
         //http.authorizeRequests().antMatchers("/index/**").hasRole("USER");
         http.authorizeRequests().antMatchers("/webjars/**").permitAll(); /*pour permetre au page statique de s'afficher sans authentification*/
         http.authorizeRequests().anyRequest().authenticated();

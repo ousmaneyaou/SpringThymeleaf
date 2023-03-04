@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="1erTemplate">    <!--la liaison avec la page creer-->
+<head>
+    <meta charset="UTF-8">
+    <title>Edit_Curiculum</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="content1">   <!--la liaison avec la page creer-->
+    <div class="col-md-6 offset-3">
+    <form method="post" th:action="@{save?(page=${page}, keyword=${keyword})}">
+        <div>
+            <label >ID :</label>
+            <label th:text="${curiculum.id}"></label>
+            <input class="form-control" type="hidden" name="id" th:value="${curiculum.id}">
+            <br>
+
+        </div>
+
+        <div>
+            <label for="nom">Nom</label>
+            <input id="nom" class="form-control" type="text" name="nom" placeholder="Enter nom" th:value="${curiculum.nom}">
+            <span class="text-danger" th:errors="${curiculum.nom}"></span>
+        </div>
+
+        <div>
+            <label for="prenom">Prenom</label>
+            <input id="prenom" class="form-control" type="text" name="prenom" placeholder="Enter prenom" th:value="${curiculum.prenom}">
+            <span class="text-danger" th:errors="${curiculum.prenom}"></span>
+        </div>
+        <div>
+            <label>Age</label>
+            <input class="form-control" type="text" name="age" th:value="${curiculum.age}">
+            <span class="text-danger" th:errors="${curiculum.age}"></span>
+        </div>
+        <div>
+            <label for="adresse">Adresse</label>
+            <input id="adresse" class="form-control" type="text" name="adresse" placeholder="Enter adresse" th:value="${curiculum.adresse}">
+            <span class="text-danger" th:errors="${curiculum.adresse}"></span>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input id="email" class="form-control" type="text" name="email" placeholder="Enter email" th:value="${curiculum.email}">
+            <span class="text-danger" th:errors="${curiculum.email}"></span>
+        </div>
+        <div>
+            <label for="telephone">Telephone</label>
+            <input id="telephone" class="form-control" type="text" name="telephone" placeholder="Enter telephone" th:value="${curiculum.telephone}">
+            <span class="text-danger" th:errors="${curiculum.telephone}"></span>
+        </div>
+        <div>
+            <label for="niveauetude">NiveauEtude</label>
+            <input id="niveauetude" class="form-control" type="text" name="niveauetude" placeholder="Enter niveauetude" th:value="${curiculum.niveauetude}">
+            <span class="text-danger" th:errors="${curiculum.niveauetude}"></span>
+        </div>
+        <div>
+            <label for="experiencepro">ExperiencePro</label>
+            <input id="experiencepro" class="form-control" type="text" name="experiencepro" placeholder="Enter experiencepro" th:value="${curiculum.experiencepro}">
+            <span class="text-danger" th:errors="${curiculum.experiencepro}"></span>
+        </div>
+        <br>
+        <!--<div>
+            <label for="category">Category</label>
+            <input id="category" class="form-control" type="text" name="category" placeholder="Enter category" th:value="${curiculum.category}">
+            <span class="text-danger" th:errors="${curiculum.category}"></span>
+        </div>
+        <br>-->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    </div>
+
+</div>
+</div>
+</body>
+</html>
